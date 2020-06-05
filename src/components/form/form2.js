@@ -28,6 +28,7 @@ class MyForm extends React.Component {
         onSubmit={this.onSubmit}
       >
         <Form>
+          <h2>Форма авторизации</h2>
           <label htmlFor="firstName">First Name</label>
           <Input name="firstName" type="text" />
           <ErrorMessage name="firstName" />

@@ -131,6 +131,7 @@ class SubmitForm extends React.Component {
         onSubmit={this.onSubmit}
       >
         <Form className="form" onChange={this.handleClearSuccess}>
+          <h1>Главная</h1>
           <div>
             <label htmlFor="name">
               Имя

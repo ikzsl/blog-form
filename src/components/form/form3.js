@@ -94,6 +94,7 @@ const SubmitForm = () => {
           setSuccessMessage(null);
         }}
       >
+        <h1>Форма регистрации</h1>
         <div>
           <label htmlFor="name">
             Имя
