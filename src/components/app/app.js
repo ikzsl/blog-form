@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import {
-  BrowserRouter, Switch, Route, Redirect,
+  HashRouter, Switch, Route, Redirect,
 } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProfileFetch } from '../../actions/actions';
@@ -23,7 +23,7 @@ const App = () => {
   const { id } = currentUser;
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div className="App">
         {id ? <Redirect to="/" /> : <Redirect to="/login" />}
         <Switch>
@@ -33,7 +33,7 @@ const App = () => {
           <Route path="*" component={PageNotFound} />
         </Switch>
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 
