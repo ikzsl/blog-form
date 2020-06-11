@@ -17,12 +17,7 @@ const Login = () => {
   };
 
   const validationSchema = Yup.object().shape({
-    password: Yup.string()
-      .matches(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6,40}$/,
-        'от 6 до 40 символов, как минимум одна цифра и одна заглавная буква',
-      )
-      .required('Пароль нужен'),
+    password: Yup.string().required('Пароль нужен'),
 
     email: Yup.string().email('Неправильная почта').required('Почту, пожалуйста'),
   });
@@ -59,13 +54,7 @@ const Login = () => {
               <span className="required-star"> *</span>
             </label>
             <Form.Item name="password">
-              <Input.Password
-                id="pwd"
-                name="password"
-                placeholder="bu7UYvjl2nkj9WNshd"
-                size="large"
-                autoComplete="off"
-              />
+              <Input.Password id="pwd" name="password" size="large" autoComplete="off" />
             </Form.Item>
           </div>
 
