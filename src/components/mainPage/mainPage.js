@@ -19,7 +19,7 @@ const Main = () => {
 
   const { username } = currentUser;
   return (
-    <>
+    <div className="form-container">
       <h1>{`Здравствуй ${username}`}</h1>
       <Button
         disabled={false}
@@ -31,7 +31,7 @@ const Main = () => {
       >
         Выйти
       </Button>
-    </>
+    </div>
   );
 };
 
