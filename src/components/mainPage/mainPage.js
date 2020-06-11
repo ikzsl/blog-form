@@ -28,6 +28,7 @@ const Main = () => {
         icon={<LogoutOutlined />}
         shape="round"
         onClick={handleExit}
+        type="danger"
       >
         Выйти
       </Button>

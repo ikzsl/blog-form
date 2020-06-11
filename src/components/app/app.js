@@ -5,8 +5,9 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { getProfileFetch } from '../../actions/actions';
 
-import Signup from '../form/Signup';
-import Login from '../form/Login';
+import Header from '../header/Header';
+import SignupForm from '../signupForm/SignupForm';
+import LoginForm from '../loginForm/LoginForm';
 import MainPage from '../mainPage/mainPage';
 import PageNotFound from '../pageNotFound/pageNotFound';
 
@@ -24,15 +25,14 @@ const App = () => {
 
   return (
     <HashRouter>
-      <div className="App">
-        {id ? <Redirect to="/" /> : <Redirect to="/login" />}
-        <Switch>
-          <Route exact path="/" component={MainPage} />
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={Signup} />
-          <Route path="*" component={PageNotFound} />
-        </Switch>
-      </div>
+      {id ? <Redirect to="/" /> : <Redirect to="/login" />}
+      <Header />
+      <Switch>
+        <Route exact path="/" component={MainPage} />
+        <Route path="/login" component={LoginForm} />
+        <Route path="/signup" component={SignupForm} />
+        <Route path="*" component={PageNotFound} />
+      </Switch>
     </HashRouter>
   );
 };

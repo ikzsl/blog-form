@@ -4,9 +4,10 @@ import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { Form, Input, SubmitButton } from 'formik-antd';
-import { MailOutlined, UserOutlined } from '@ant-design/icons';
+import { MailOutlined, UserOutlined, UserAddOutlined } from '@ant-design/icons';
 
 import { userPostFetch } from '../../actions/actions';
+import './signupForm.scss';
 
 const Signup = () => {
   const dispatch = useDispatch();
@@ -37,11 +38,11 @@ const Signup = () => {
   };
 
   return (
-    <>
+    <div className="formContainer">
       <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
         <Form className="form">
           <h1>Регистрации</h1>
-          <div>
+          <div className="formItem">
             <label htmlFor="username">
               Имя
               <span className="required-star"> *</span>
@@ -56,7 +57,7 @@ const Signup = () => {
               />
             </Form.Item>
           </div>
-          <div>
+          <div className="formItem">
             <label htmlFor="email">
               Электропочта
               <span className="required-star"> *</span>
@@ -71,7 +72,7 @@ const Signup = () => {
               />
             </Form.Item>
           </div>
-          <div>
+          <div className="formItem">
             <label htmlFor="pwd">
               Пароль
               <span className="required-star"> *</span>
@@ -88,16 +89,25 @@ const Signup = () => {
           </div>
 
           <div className="formButtonsContainer">
-            <SubmitButton loading={false} disabled={false} size="large" className="button">
+            <SubmitButton
+              loading={false}
+              disabled={false}
+              size="large"
+              shape="round"
+              icon={<UserAddOutlined />}
+              className="button"
+            >
               Зарегистрироваться
             </SubmitButton>
           </div>
           <span className="error">{error}</span>
         </Form>
       </Formik>
-      <p>Уже зарегистрирован?</p>
-      <Link to="/login">Войти</Link>
-    </>
+      <div className="link-container">
+        <span>Уже зарегистрировались? </span>
+        <Link to="/login">Войти</Link>
+      </div>
+    </div>
   );
 };
 

@@ -10,7 +10,7 @@ import reducers from './reducers/reducers';
 
 import 'antd/dist/antd.css';
 import './index.scss';
-import App from './components/app/app';
+import App from './components/app/App';
 
 const store = createStore(reducers, compose(applyMiddleware(thunk), composeWithDevTools()));
 

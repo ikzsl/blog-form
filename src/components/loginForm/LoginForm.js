@@ -4,10 +4,11 @@ import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { Form, Input, SubmitButton } from 'formik-antd';
-import { MailOutlined } from '@ant-design/icons';
+import { MailOutlined, LoginOutlined } from '@ant-design/icons';
 import { userLoginFetch } from '../../actions/actions';
+import './loginForm.scss';
 
-const Login = () => {
+const LoginForm = () => {
   const dispatch = useDispatch();
   const error = useSelector((state) => state.error);
 
@@ -27,12 +28,12 @@ const Login = () => {
   };
 
   return (
-    <>
+    <div className="formContainer">
       <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-        <Form className="form">
+        <Form>
           <h1>Вход</h1>
 
-          <div>
+          <div className="formItem">
             <label htmlFor="email">
               Электропочта
               <span className="required-star"> *</span>
@@ -48,7 +49,7 @@ const Login = () => {
             </Form.Item>
           </div>
 
-          <div>
+          <div className="formItem">
             <label htmlFor="pwd">
               Пароль
               <span className="required-star"> *</span>
@@ -59,17 +60,25 @@ const Login = () => {
           </div>
 
           <div className="formButtonsContainer">
-            <SubmitButton loading={false} disabled={false} size="large" className="button">
+            <SubmitButton
+              loading={false}
+              disabled={false}
+              size="large"
+              shape="round"
+              icon={<LoginOutlined />}
+              className="button"
+            >
               Войти
             </SubmitButton>
           </div>
-          <span className="error">{error}</span>
         </Form>
       </Formik>
-      <p>Еще не зарегистрирован?</p>
-      <Link to="/signup">Зарегистрироваться</Link>
-    </>
+      <div className="link-container">
+        <Link to="/signup">Зарегистрироваться</Link>
+        <div className="error">{error}</div>
+      </div>
+    </div>
   );
 };
 
-export default Login;
+export default LoginForm;
