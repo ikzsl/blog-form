@@ -100,12 +100,12 @@ const Signup = () => {
               Зарегистрироваться
             </SubmitButton>
           </div>
-          <span className="error">{error}</span>
         </Form>
       </Formik>
       <div className="link-container">
         <span>Уже зарегистрировались? </span>
         <Link to="/login">Войти</Link>
+        <div className="error">{error}</div>
       </div>
     </div>
   );

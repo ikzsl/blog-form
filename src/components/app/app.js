@@ -19,7 +19,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(getProfileFetch());
-  }, []);
+  }, [currentUser.id]);
 
   const { id } = currentUser;
 
