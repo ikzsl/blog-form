@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/blog-form/static/css/main.b2c755be.chunk.css",
+    "main.css": "/blog-form/static/css/main.b0be3338.chunk.css",
     "main.js": "/blog-form/static/js/main.ad781141.chunk.js",
     "main.js.map": "/blog-form/static/js/main.ad781141.chunk.js.map",
     "runtime-main.js": "/blog-form/static/js/runtime-main.0dbf890a.js",
@@ -9,10 +9,10 @@
     "static/js/2.43e56e32.chunk.js": "/blog-form/static/js/2.43e56e32.chunk.js",
     "static/js/2.43e56e32.chunk.js.map": "/blog-form/static/js/2.43e56e32.chunk.js.map",
     "index.html": "/blog-form/index.html",
-    "precache-manifest.8ac0db942001c5eb44046f30cf4e1283.js": "/blog-form/precache-manifest.8ac0db942001c5eb44046f30cf4e1283.js",
+    "precache-manifest.5ad8dcf9299206855c94e07cb68546e5.js": "/blog-form/precache-manifest.5ad8dcf9299206855c94e07cb68546e5.js",
     "service-worker.js": "/blog-form/service-worker.js",
     "static/css/2.4deadad5.chunk.css.map": "/blog-form/static/css/2.4deadad5.chunk.css.map",
-    "static/css/main.b2c755be.chunk.css.map": "/blog-form/static/css/main.b2c755be.chunk.css.map",
+    "static/css/main.b0be3338.chunk.css.map": "/blog-form/static/css/main.b0be3338.chunk.css.map",
     "static/js/2.43e56e32.chunk.js.LICENSE.txt": "/blog-form/static/js/2.43e56e32.chunk.js.LICENSE.txt",
     "static/media/logo.png": "/blog-form/static/media/logo.968531f8.png"
   },
@@ -20,7 +20,7 @@
     "static/js/runtime-main.0dbf890a.js",
     "static/css/2.4deadad5.chunk.css",
     "static/js/2.43e56e32.chunk.js",
-    "static/css/main.b2c755be.chunk.css",
+    "static/css/main.b0be3338.chunk.css",
     "static/js/main.ad781141.chunk.js"
   ]
 }
