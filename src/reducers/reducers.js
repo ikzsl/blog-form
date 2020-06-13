@@ -1,6 +1,6 @@
 const initialState = {
   currentUser: {},
-  error: null,
+  errors: {},
 };
 
 export default function reducer(state = initialState, action) {
@@ -10,7 +10,7 @@ export default function reducer(state = initialState, action) {
     case 'LOGOUT_USER':
       return { ...state, currentUser: {} };
     case 'CHANGE_FETCH_STATUS':
-      return { ...state, error: action.payload };
+      return { ...state, errors: action.payload };
     default:
       return state;
   }

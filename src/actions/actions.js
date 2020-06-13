@@ -22,7 +22,7 @@ export const logoutUser = () => ({
 
 // ------------------ userPostFetch ----------------------
 
-export const userPostFetch = (user) => async (dispatch) => {
+export const userPostFetch = (user, setFieldError) => async (dispatch) => {
   try {
     const url = routes.userPostUrl();
     const response = await axios.post(url, { user });
@@ -32,15 +32,16 @@ export const userPostFetch = (user) => async (dispatch) => {
     dispatch(loginUser(data.user));
   } catch (err) {
     const { errors } = err.response.data;
-    const errorName = Object.keys(errors);
-    const errorMessage = `${errorName[0]} ${errors[errorName[0]].join(' ')}`;
-    dispatch(fetchLoginFailure(errorMessage));
+    dispatch(fetchLoginFailure(errors));
+    setFieldError('email', errors.email);
+    setFieldError('username', errors.username);
+    setFieldError('password', errors.password);
   }
 };
 
 // ------------------ userLoginFetch ----------------------
 
-export const userLoginFetch = (user) => async (dispatch) => {
+export const userLoginFetch = (user, setFieldError) => async (dispatch) => {
   try {
     const url = routes.userLoginUrl();
     const response = await axios.post(url, { user });
@@ -50,9 +51,9 @@ export const userLoginFetch = (user) => async (dispatch) => {
     dispatch(loginUser(data.user));
   } catch (err) {
     const { errors } = err.response.data;
-    const errorName = Object.keys(errors);
-    const errorMessage = `${errorName[0]} ${errors[errorName[0]].join(' ')}`;
-    dispatch(fetchLoginFailure(errorMessage));
+    dispatch(fetchLoginFailure(errors));
+    setFieldError('email', `email or password ${errors['email or password']}`);
+    setFieldError('password', `email or password ${errors['email or password']}`);
   }
 };
 

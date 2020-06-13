@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -9,34 +9,32 @@ import { MailOutlined, UserOutlined, UserAddOutlined } from '@ant-design/icons';
 import { userPostFetch } from '../../actions/actions';
 import './signupForm.scss';
 
+const validationSchema = Yup.object().shape({
+  username: Yup.string()
+    .max(50, 'Слишком длинно - не более 50 символов')
+    .required('Имя обязательно'),
+  password: Yup.string()
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d\w\W]{6,40}$/,
+      'от 6 до 40 символов, как минимум одна цифра и одна заглавная буква',
+    )
+    .required('Пароль нужен'),
+
+  email: Yup.string().email('Неправильная почта').required('Почту, пожалуйста'),
+});
+
+const initialValues = {
+  username: '',
+  password: '',
+  email: '',
+};
+
 const Signup = () => {
   const dispatch = useDispatch();
-  const error = useSelector((state) => state.error);
 
-  const initialValues = {
-    username: '',
-    password: '',
-    email: '',
+  const onSubmit = (values, { setFieldError }) => {
+    dispatch(userPostFetch(values, setFieldError));
   };
-
-  const validationSchema = Yup.object().shape({
-    username: Yup.string()
-      .max(50, 'Слишком длинно - не более 50 символов')
-      .required('Имя обязательно'),
-    password: Yup.string()
-      .matches(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{6,40}$/,
-        'от 6 до 40 символов, как минимум одна цифра и одна заглавная буква',
-      )
-      .required('Пароль нужен'),
-
-    email: Yup.string().email('Неправильная почта').required('Почту, пожалуйста'),
-  });
-
-  const onSubmit = async (values) => {
-    dispatch(userPostFetch(values));
-  };
-
   return (
     <div className="formContainer">
       <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
@@ -105,7 +103,6 @@ const Signup = () => {
       <div className="link-container">
         <span>Уже зарегистрировались? </span>
         <Link to="/login">Войти</Link>
-        <div className="error">{error}</div>
       </div>
     </div>
   );

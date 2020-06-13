@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -8,23 +8,21 @@ import { MailOutlined, LoginOutlined } from '@ant-design/icons';
 import { userLoginFetch } from '../../actions/actions';
 import './loginForm.scss';
 
+const initialValues = {
+  password: '',
+  email: '',
+};
+
+const validationSchema = Yup.object().shape({
+  password: Yup.string().required('Пароль нужен'),
+  email: Yup.string().email('Неправильная почта').required('Почту, пожалуйста'),
+});
+
 const LoginForm = () => {
   const dispatch = useDispatch();
-  const error = useSelector((state) => state.error);
 
-  const initialValues = {
-    password: '',
-    email: '',
-  };
-
-  const validationSchema = Yup.object().shape({
-    password: Yup.string().required('Пароль нужен'),
-
-    email: Yup.string().email('Неправильная почта').required('Почту, пожалуйста'),
-  });
-
-  const onSubmit = async (values) => {
-    dispatch(userLoginFetch(values));
+  const onSubmit = async (values, { setFieldError }) => {
+    dispatch(userLoginFetch(values, setFieldError));
   };
 
   return (
@@ -75,7 +73,6 @@ const LoginForm = () => {
       </Formik>
       <div className="link-container">
         <Link to="/signup">Зарегистрироваться</Link>
-        <div className="error">{error}</div>
       </div>
     </div>
   );
