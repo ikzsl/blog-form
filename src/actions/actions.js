@@ -1,24 +1,10 @@
 import axios from 'axios';
+import { createAction } from 'redux-actions';
 import routes from '../routes';
 
-const fetchLoginFailure = (errorMessage) => ({
-  type: 'CHANGE_FETCH_STATUS',
-  payload: errorMessage,
-});
-
-const fetchLoginSuccess = () => ({
-  type: 'CHANGE_FETCH_STATUS',
-  payload: null,
-});
-
-const loginUser = (userObj) => ({
-  type: 'LOGIN_USER',
-  payload: userObj,
-});
-
-export const logoutUser = () => ({
-  type: 'LOGOUT_USER',
-});
+export const changeFetchStatus = createAction('CHANGE_FETCH_STATUS');
+export const loginUser = createAction('LOGIN_USER');
+export const logoutUser = createAction('LOGOUT_USER');
 
 // ------------------ userPostFetch ----------------------
 
@@ -28,11 +14,11 @@ export const userPostFetch = (user, setFieldError) => async (dispatch) => {
     const response = await axios.post(url, { user });
     const { data } = response;
     localStorage.setItem('token', data.user.token);
-    dispatch(fetchLoginSuccess());
+    dispatch(changeFetchStatus(null));
     dispatch(loginUser(data.user));
   } catch (err) {
     const { errors } = err.response.data;
-    dispatch(fetchLoginFailure(errors));
+    dispatch(changeFetchStatus(errors));
     setFieldError('email', errors.email);
     setFieldError('username', errors.username);
     setFieldError('password', errors.password);
@@ -47,11 +33,11 @@ export const userLoginFetch = (user, setFieldError) => async (dispatch) => {
     const response = await axios.post(url, { user });
     const { data } = response;
     localStorage.setItem('token', data.user.token);
-    dispatch(fetchLoginSuccess());
+    dispatch(changeFetchStatus(null));
     dispatch(loginUser(data.user));
   } catch (err) {
     const { errors } = err.response.data;
-    dispatch(fetchLoginFailure(errors));
+    dispatch(changeFetchStatus(errors));
     // setFieldError('email', `email or password ${errors['email or password']}`);
     setFieldError('password', `email or password ${errors['email or password']}`);
   }

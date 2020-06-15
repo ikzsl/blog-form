@@ -1,17 +1,23 @@
-const initialState = {
-  currentUser: {},
-  errors: {},
-};
+import { combineReducers } from 'redux';
+import { handleActions } from 'redux-actions';
+import * as actions from '../actions/actions';
 
-export default function reducer(state = initialState, action) {
-  switch (action.type) {
-    case 'LOGIN_USER':
-      return { ...state, currentUser: action.payload };
-    case 'LOGOUT_USER':
-      return { ...state, currentUser: {} };
-    case 'CHANGE_FETCH_STATUS':
-      return { ...state, errors: action.payload };
-    default:
-      return state;
-  }
-}
+const currentUser = handleActions(
+  {
+    [actions.logoutUser]: () => {},
+    [actions.loginUser]: (state, action) => action.payload,
+  },
+  {},
+);
+
+const errors = handleActions(
+  {
+    [actions.changeFetchStatus]: (state, action) => action.payload,
+  },
+  {},
+);
+
+export default combineReducers({
+  currentUser,
+  errors,
+});
