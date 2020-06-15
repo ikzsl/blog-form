@@ -17,7 +17,7 @@ const userFetch = async (user, dispatch, url) => {
 // ------------------ userPostFetch ----------------------
 export const userPostFetch = (user, setFieldError) => async (dispatch) => {
   try {
-    userFetch(user, dispatch, routes.userPostUrl());
+    await userFetch(user, dispatch, routes.userPostUrl());
   } catch ({ response }) {
     const { errors } = response.data;
     dispatch(changeFetchStatus(errors));

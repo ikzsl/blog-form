@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getProfileFetch } from '../../actions/actions';
 
 import Header from '../header/Header';
-import SignupForm from '../signupForm/SignupForm';
-import LoginForm from '../loginForm/LoginForm';
-import MainPage from '../mainPage/mainPage';
-import PageNotFound from '../pageNotFound/pageNotFound';
+import SignupForm from '../../pages/signupForm/SignupForm';
+import LoginForm from '../../pages/loginForm/LoginForm';
+import MainPage from '../../pages/mainPage/mainPage';
+import PageNotFound from '../../pages/pageNotFound/pageNotFound';
 
 import PrivateRoute from '../privateRoute/PrivateRoute';
 import PublicRoute from '../publicRoute/PublicRoute';
