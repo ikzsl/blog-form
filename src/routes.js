@@ -1,7 +1,9 @@
-const host = 'https://conduit.productionready.io/api/';
+import axios from 'axios';
+
+axios.defaults.baseURL = 'https://conduit.productionready.io/api/';
 
 export default {
-  userPostUrl: () => [host, 'users'].join('/'),
-  userLoginUrl: () => [host, 'users', 'login'].join('/'),
-  getProfileUrl: () => [host, 'user'].join('/'),
+  userPostUrl: () => 'users',
+  userLoginUrl: () => 'users/login',
+  getProfileUrl: () => 'user',
 };

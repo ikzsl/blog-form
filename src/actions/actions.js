@@ -52,7 +52,7 @@ export const userLoginFetch = (user, setFieldError) => async (dispatch) => {
   } catch (err) {
     const { errors } = err.response.data;
     dispatch(fetchLoginFailure(errors));
-    setFieldError('email', `email or password ${errors['email or password']}`);
+    // setFieldError('email', `email or password ${errors['email or password']}`);
     setFieldError('password', `email or password ${errors['email or password']}`);
   }
 };
@@ -74,6 +74,8 @@ export const getProfileFetch = () => async (dispatch) => {
     const { data } = response;
     dispatch(loginUser(data.user));
   } catch (err) {
-    localStorage.removeItem('token');
+    if (err.response.status === 401) {
+      localStorage.removeItem('token');
+    }
   }
 };

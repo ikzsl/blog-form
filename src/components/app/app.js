@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react';
-import {
-  HashRouter, Switch, Route, Redirect,
-} from 'react-router-dom';
+import { HashRouter, Switch, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProfileFetch } from '../../actions/actions';
 
@@ -10,6 +8,9 @@ import SignupForm from '../signupForm/SignupForm';
 import LoginForm from '../loginForm/LoginForm';
 import MainPage from '../mainPage/mainPage';
 import PageNotFound from '../pageNotFound/pageNotFound';
+
+import PrivateRoute from '../privateRoute/PrivateRoute';
+import PublicRoute from '../publicRoute/PublicRoute';
 
 import './app.scss';
 
@@ -21,16 +22,13 @@ const App = () => {
     dispatch(getProfileFetch());
   }, [currentUser.id]);
 
-  const { id } = currentUser;
-
   return (
     <HashRouter>
-      {id ? <Redirect to="/" /> : <Redirect to="/login" />}
       <Header />
       <Switch>
-        <Route exact path="/" component={MainPage} />
-        <Route path="/login" component={LoginForm} />
-        <Route path="/signup" component={SignupForm} />
+        <PrivateRoute exact path="/" component={MainPage} />
+        <PublicRoute path="/login" component={LoginForm} />
+        <PublicRoute path="/signup" component={SignupForm} />
         <Route path="*" component={PageNotFound} />
       </Switch>
     </HashRouter>
