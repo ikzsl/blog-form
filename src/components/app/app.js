@@ -27,8 +27,8 @@ const App = () => {
       <Header />
       <Switch>
         <PrivateRoute exact path="/" component={MainPage} />
-        <PublicRoute path="/login" component={LoginForm} />
-        <PublicRoute path="/signup" component={SignupForm} />
+        <PublicRoute exact path="/login" component={LoginForm} />
+        <PublicRoute exact path="/signup" component={SignupForm} />
         <Route path="*" component={PageNotFound} />
       </Switch>
     </HashRouter>
