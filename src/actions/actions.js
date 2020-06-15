@@ -6,18 +6,20 @@ export const changeFetchStatus = createAction('CHANGE_FETCH_STATUS');
 export const loginUser = createAction('LOGIN_USER');
 export const logoutUser = createAction('LOGOUT_USER');
 
-// ------------------ userPostFetch ----------------------
+const userFetch = async (user, dispatch, url) => {
+  const response = await axios.post(url, { user });
+  const { data } = response;
+  localStorage.setItem('token', data.user.token);
+  dispatch(changeFetchStatus(null));
+  dispatch(loginUser(data.user));
+};
 
+// ------------------ userPostFetch ----------------------
 export const userPostFetch = (user, setFieldError) => async (dispatch) => {
   try {
-    const url = routes.userPostUrl();
-    const response = await axios.post(url, { user });
-    const { data } = response;
-    localStorage.setItem('token', data.user.token);
-    dispatch(changeFetchStatus(null));
-    dispatch(loginUser(data.user));
-  } catch (err) {
-    const { errors } = err.response.data;
+    userFetch(user, dispatch, routes.userPostUrl());
+  } catch ({ response }) {
+    const { errors } = response.data;
     dispatch(changeFetchStatus(errors));
     setFieldError('email', errors.email);
     setFieldError('username', errors.username);
@@ -26,17 +28,11 @@ export const userPostFetch = (user, setFieldError) => async (dispatch) => {
 };
 
 // ------------------ userLoginFetch ----------------------
-
 export const userLoginFetch = (user, setFieldError) => async (dispatch) => {
   try {
-    const url = routes.userLoginUrl();
-    const response = await axios.post(url, { user });
-    const { data } = response;
-    localStorage.setItem('token', data.user.token);
-    dispatch(changeFetchStatus(null));
-    dispatch(loginUser(data.user));
-  } catch (err) {
-    const { errors } = err.response.data;
+    await userFetch(user, dispatch, routes.userLoginUrl());
+  } catch ({ response }) {
+    const { errors } = response.data;
     dispatch(changeFetchStatus(errors));
     // setFieldError('email', `email or password ${errors['email or password']}`);
     setFieldError('password', `email or password ${errors['email or password']}`);
@@ -44,7 +40,6 @@ export const userLoginFetch = (user, setFieldError) => async (dispatch) => {
 };
 
 // --------------------getProfileFetch--------------------
-
 export const getProfileFetch = () => async (dispatch) => {
   const { token } = localStorage;
   if (!token) {
