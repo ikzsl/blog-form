@@ -42,16 +42,37 @@ export const userLoginFetch = (user, setFieldError) => async (dispatch) => {
 // --------------------getProfileFetch--------------------
 export const getProfileFetch = () => async (dispatch) => {
   const { token } = localStorage;
+
+  // await axios.interceptors.request.use((config) => {
+  //   config.headers.Authorization = token;
+  //   console.log(config.headers.Authorization, token);
+  // });
+
+  // -----------------------------
+  // const createSetAuthInterceptor = (options) => {
+  //   if (options.access) {
+  //     config.headers.Authorization = options.access;
+  //   } else {
+  //     delete config.headers.Authorization;
+  //   }
+  //   return config;
+  // };
+
+  // const setAuthCb = createSetAuthInterceptor(store.state.auth);
+  // axios.interceptors.request.use(setAuthCb);
+  // -----------------------------
+
   if (!token) {
     return;
   }
   try {
-    const url = routes.getProfileUrl();
-    const response = await axios.get(url, {
-      headers: {
-        Authorization: `Token ${token}`,
-      },
+    await axios.interceptors.request.use((config) => {
+      // eslint-disable-next-line no-param-reassign
+      config.headers.Authorization = `Token ${token}`;
+      return config;
     });
+    const url = routes.getProfileUrl();
+    const response = await axios.get(url);
     const { data } = response;
     dispatch(loginUser(data.user));
   } catch (err) {
