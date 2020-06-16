@@ -18,9 +18,10 @@ const Main = () => {
   };
 
   const { username } = currentUser;
+  const Header = () => (username ? <h1>{`Здравствуй ${username}`}</h1> : null);
   return (
     <div className="form-container">
-      <h1>{`Здравствуй ${username}`}</h1>
+      <Header />
       <Button
         disabled={false}
         size="large"
