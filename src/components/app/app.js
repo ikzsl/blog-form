@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
 import { HashRouter, Switch, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import Loader from 'react-loader';
 import { getProfileFetch } from '../../actions/actions';
-import Loader from '../loader/loader';
-
 import Header from '../header/Header';
 
 import SignupForm from '../../pages/signupForm/SignupForm';
