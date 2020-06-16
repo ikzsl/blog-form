@@ -17,7 +17,15 @@ const errors = handleActions(
   {},
 );
 
+const loading = handleActions(
+  {
+    [actions.changeLoadingStatus]: (state, action) => action.payload,
+  },
+  false,
+);
+
 export default combineReducers({
   currentUser,
   errors,
+  loading,
 });

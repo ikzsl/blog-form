@@ -2,8 +2,10 @@ import React, { useEffect } from 'react';
 import { HashRouter, Switch, Route } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProfileFetch } from '../../actions/actions';
+import Loader from '../loader/loader';
 
 import Header from '../header/Header';
+
 import SignupForm from '../../pages/signupForm/SignupForm';
 import LoginForm from '../../pages/loginForm/LoginForm';
 import MainPage from '../../pages/mainPage/mainPage';
@@ -17,6 +19,7 @@ import './app.scss';
 const App = () => {
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.currentUser);
+  const loading = useSelector((state) => state.loading);
 
   useEffect(() => {
     dispatch(getProfileFetch());
@@ -25,6 +28,7 @@ const App = () => {
   return (
     <HashRouter>
       <Header />
+      <Loader loaded={!loading} />
       <Switch>
         <PrivateRoute exact path="/" component={MainPage} />
         <PublicRoute exact path="/login" component={LoginForm} />
